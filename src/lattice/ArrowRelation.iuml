@@ -1,0 +1,10 @@
+package lattice {
+    class ArrowRelation {
+        .. Constructors ..
+        +ArrowRelation(Lattice lattice)
+        .. Transformers ..
+        +void writeLaTex(String filename)
+    }
+
+    DGraph <|-- ArrowRelation
+}

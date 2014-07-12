@@ -1,0 +1,11 @@
+digraph G {
+Graph [rankdir=BT]
+3 [label="a"]
+4 [label="b"]
+5 [label="c"]
+6 [label="d"]
+7 [label="e"]
+8 [label="f"]
+4->7
+8->3
+}
