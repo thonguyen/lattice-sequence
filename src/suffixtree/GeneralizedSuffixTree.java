@@ -193,7 +193,7 @@ public class GeneralizedSuffixTree {
 		if (i - j + 1 > 0){
 			while (!node.isInEdge(i - j)){
 				//node.printChildren();
-				result.add(node);
+				//result.add(node);
 				node = node.getChildren().get(text.charAt(k));
 				k += node.getEdgeLength();
 			}
@@ -331,8 +331,8 @@ public class GeneralizedSuffixTree {
 					}*/
 					String str = text.substring(n.getEnd() - n.getDepth(), n.getEnd());
 					String currentString = text.substring(node.getEnd() - node.getDepth(), node.getEnd());
-//System.out.println("str:" + str);
-//System.out.println("cs:" + currentString);
+System.out.println("str:" + str);
+System.out.println("cs:" + currentString);
 //System.out.println(result);
 //System.out.println(temp);
 					if(!isSubstring){
@@ -344,6 +344,7 @@ public class GeneralizedSuffixTree {
 						temp.remove(n);
 					}
 				}
+System.out.println("is:" + isSubstring);
 				if(!isSubstring){
 					temp.add(node);
 				}

@@ -186,7 +186,11 @@ public class ContextSequence extends ClosureSystem {
             return new TreeSet();
         }
     }	
-	
+    /**
+     * Returns the set of observations that are intent of the specified attribute.
+     * @param seqs
+     * @return
+     */
 	private TreeSet<Comparable> getExtent(TreeSet<Comparable> seqs){
         TreeSet<Comparable> objects = new TreeSet(observations);
 		for(Comparable seq: seqs){
@@ -196,18 +200,21 @@ public class ContextSequence extends ClosureSystem {
 	}
 	
     /**
-     * Returns the set of observations that are intent of the specified attribute.
-     *
+     * Returns the set of observations that contain the specified sequence 
+     * 
      * @param   seq  a sequence
      *
      * @return  the set of observations
      */
     public TreeSet<Comparable> getExtent(Comparable seq) {
-        if (sequences.contains(seq)) {
-            return this.extent.get(seq);
-        } 
-
-        return new TreeSet();
+    	TreeSet<Comparable> obs = new TreeSet<Comparable>();
+    	//get all sequences that contain seq
+    	for(Comparable sequence: sequences){
+    		if(((Sequence)sequence).containSubsequence((Sequence)seq)){
+    			obs.addAll(extent.get(sequence));
+    		}
+    	}
+        return obs;
     }
     
     /**

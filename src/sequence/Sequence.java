@@ -11,8 +11,14 @@ public class Sequence implements Comparable<Sequence>{
 		this.sequence = seq;	
 		id++;
 	}
-
-
+	/**
+	 * 
+	 * @param seq
+	 * @return true if seq is subsequence(substring) of current sequence
+	 */
+	public boolean containSubsequence(Sequence seq){
+		return toString().indexOf(seq.toString()) >= 0;
+	}
 //	@Override
 	public int compareTo2(Sequence o) {
 		if(id > o.getId()){
@@ -30,16 +36,10 @@ public class Sequence implements Comparable<Sequence>{
 		if(toString().equals(o.toString())){
 			return 0;
 		}
-		
-		//sequence o is included in this string 
-//		if(toString().contains(o.toString())){
-//			
-//		}
-		if(toString().indexOf(o.toString()) >= 0){
+		if(containSubsequence(o)){
 			return 1;
 		}
-		
-		if(o.toString().indexOf(toString()) >= 0){
+		if(o.containSubsequence(this)){
 			return -1;
 		}
 		
