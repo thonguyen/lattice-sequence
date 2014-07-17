@@ -313,28 +313,11 @@ public class GeneralizedSuffixTree {
 		if(c == numberOfString){
 			if(previousNode == null || previousNode.getParent() != node){
 				boolean isSubstring = false;
-				//stupid solution
+				//stupid solution, we can do better
 				List<Node> temp = new LinkedList<Node>(result);
 				for(Node n: result){
-					int begin = n.getStart();
-					int end = n.getEnd();
-					int currentNodeBegin = node.getStart();
-					int currentNodeEnd = node.getEnd();
-					// current common substring is a substring of n, does not work
-					/*
-					if(currentNodeBegin >= begin && currentNodeEnd <= end){
-						isSubstring = true;
-					}
-					
-					if(currentNodeBegin <= begin && currentNodeEnd >= end){
-						temp.remove(n);
-					}*/
 					String str = text.substring(n.getEnd() - n.getDepth(), n.getEnd());
 					String currentString = text.substring(node.getEnd() - node.getDepth(), node.getEnd());
-System.out.println("str:" + str);
-System.out.println("cs:" + currentString);
-//System.out.println(result);
-//System.out.println(temp);
 					if(!isSubstring){
 						if (str.indexOf(currentString) >= 0) {
 							isSubstring = true;
@@ -344,7 +327,6 @@ System.out.println("cs:" + currentString);
 						temp.remove(n);
 					}
 				}
-System.out.println("is:" + isSubstring);
 				if(!isSubstring){
 					temp.add(node);
 				}
@@ -398,42 +380,11 @@ System.out.println("is:" + isSubstring);
 		}
 		return subStrings;
 	}
+	
 	public String getText() {
 		return text;
 	}
 	public void setText(String text) {
 		this.text = text;
 	}
-/*	
-	public static void main(String args[]){
-		String[] inputs = new String[]{"aabcc", "abdcc", "xyzabdecc","xyzabcde","de1ab1434fdaabc"};
-		//GeneralizedSuffixTree gst = new GeneralizedSuffixTree(new String[] {"mississippi", "amissapi"});
-		GeneralizedSuffixTree gst = new GeneralizedSuffixTree(inputs);
-		gst.buildTree();
-		gst.show(gst.getRoot(), "");
-		Set<Integer> stringIds = new HashSet<Integer>();
-		
-		for(Map.Entry<Character, Node>child: gst.getRoot().getChildren().entrySet()){
-			Map<Integer, List<Node>> commonSubStrings = new HashMap<Integer, List<Node>>();
-			gst.findLCS(child.getValue(), stringIds, commonSubStrings);
-			//show substring
-			for(Map.Entry<Integer, List<Node>> data: commonSubStrings.entrySet()){
-				System.out.println("Depth:" + data.getKey());
-				for(Node n: data.getValue()){
-					String out = gst.getText().substring(n.getStart(), n.getEnd());
-					while(n.getParent() != null){
-						n = n.getParent();
-						out = gst.getText().substring(n.getStart(), n.getEnd()) + out;					
-					}
-					System.out.println(out);
-				}
-			}
-		}
-		
-		System.out.println("Common substrings:");
-		for(String s:gst.getLCS()){
-			System.out.println(s);
-		}
-	}
-*/
 }

@@ -6,7 +6,11 @@ public class Sequence implements Comparable<Sequence>{
 	 */
 	private String sequence;
 	private static int id = 0;
-
+	
+	/**
+	 * not used
+	 * @param seq
+	 */
 	public Sequence(String seq) {
 		this.sequence = seq;	
 		id++;
@@ -19,6 +23,7 @@ public class Sequence implements Comparable<Sequence>{
 	public boolean containSubsequence(Sequence seq){
 		return toString().indexOf(seq.toString()) >= 0;
 	}
+		
 //	@Override
 	public int compareTo2(Sequence o) {
 		if(id > o.getId()){

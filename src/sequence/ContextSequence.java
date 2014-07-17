@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -13,7 +14,6 @@ import suffixtree.GeneralizedSuffixTree;
 import lattice.ClosureSystem;
 
 /**
- * Class name must be changed
  * 
  * @author NGUYEN Van Tho
  * 
@@ -60,7 +60,7 @@ public class ContextSequence extends ClosureSystem {
 	private void init() {
 		sequences = new TreeSet<Comparable>();
 		observations = new TreeSet<Comparable>();
-		//attributes = new TreeSet<Comparable>();
+
 		intent = new TreeMap<Comparable, TreeSet<Comparable>>();
 		extent = new TreeMap<Comparable, TreeSet<Comparable>>();
 	}
@@ -144,6 +144,41 @@ public class ContextSequence extends ClosureSystem {
         }
         return false;        
     }
+
+    /**
+     * Returns the set of observations that are intent of the specified attribute.
+     * @param seqs
+     * @return
+     */
+	private TreeSet<Comparable> getExtent(TreeSet<Comparable> seqs){
+        TreeSet<Comparable> objects = new TreeSet(observations);
+		for(Comparable seq: seqs){
+			objects.retainAll(getExtent(seq));
+		}
+//		TreeSet<Comparable> objects = new TreeSet();
+//		for(Comparable seq: seqs){
+//			objects.addAll(getExtent(seq));
+//		}
+		return objects;
+	}
+	
+    /**
+     * Returns the set of observations that contain the specified sequence 
+     * 
+     * @param   seq  a sequence
+     *
+     * @return  the set of observations
+     */
+    public TreeSet<Comparable> getExtent(Comparable seq) {
+    	TreeSet<Comparable> obs = new TreeSet<Comparable>();
+    	//get all sequences that contain seq
+    	for(Comparable sequence: sequences){
+    		if(((Sequence)sequence).containSubsequence((Sequence)seq)){
+    			obs.addAll(extent.get(sequence));
+    		}
+    	}
+        return obs;
+    }
     
 	private TreeSet<Comparable> getIntent(TreeSet<Comparable> objects){
 		TreeSet<Comparable> seqs = new TreeSet<Comparable>();
@@ -186,36 +221,7 @@ public class ContextSequence extends ClosureSystem {
             return new TreeSet();
         }
     }	
-    /**
-     * Returns the set of observations that are intent of the specified attribute.
-     * @param seqs
-     * @return
-     */
-	private TreeSet<Comparable> getExtent(TreeSet<Comparable> seqs){
-        TreeSet<Comparable> objects = new TreeSet(observations);
-		for(Comparable seq: seqs){
-			objects.retainAll(getExtent(seq));
-		}
-		return objects;
-	}
-	
-    /**
-     * Returns the set of observations that contain the specified sequence 
-     * 
-     * @param   seq  a sequence
-     *
-     * @return  the set of observations
-     */
-    public TreeSet<Comparable> getExtent(Comparable seq) {
-    	TreeSet<Comparable> obs = new TreeSet<Comparable>();
-    	//get all sequences that contain seq
-    	for(Comparable sequence: sequences){
-    		if(((Sequence)sequence).containSubsequence((Sequence)seq)){
-    			obs.addAll(extent.get(sequence));
-    		}
-    	}
-        return obs;
-    }
+
     
     /**
      * Checks if the specified observation belongs to this component.
@@ -265,6 +271,39 @@ public class ContextSequence extends ClosureSystem {
 	}
 	@Override
 	public String toString() {
-		return "";
+        StringBuffer string = new StringBuffer();
+        string.append("Observations: ");
+        for (Comparable o : this.observations) {
+            // first line : All observations separated by a space
+            // a StringTokenizer is used to delete spaces in the
+            // string description of each observation
+            StringTokenizer st = new StringTokenizer(o.toString());
+            while (st.hasMoreTokens()) {
+                string.append(st.nextToken());
+            }
+            string.append(" ");
+        }
+
+        // next lines : All intents of observations, one on each line:
+        // observation : list of attributes
+        // a StringTokenizer is used to delete spaces in the
+        // string description of each observation and attributes
+        string.append("\n");
+        for (Comparable o : this.observations) {
+            StringTokenizer st = new StringTokenizer(o.toString());
+            while (st.hasMoreTokens()) {
+                string.append(st.nextToken());
+            }
+            string.append(" : ");
+            for (Comparable a : this.getIntent(o)) {
+                st = new StringTokenizer(a.toString());
+                while (st.hasMoreTokens()) {
+                    string.append(st.nextToken());
+                }
+                string.append(" ");
+            }
+            string.append("\n");
+        }
+        return string.toString();
 	}
 }
