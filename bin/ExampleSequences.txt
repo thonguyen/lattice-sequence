@@ -1,6 +1,0 @@
-Observations: 1 2 3 4
-Attributes: a d g r
-1 : drdrgaarg
-2 : drgadrgdr
-3 : ragararrr
-4 : rrrardrag
