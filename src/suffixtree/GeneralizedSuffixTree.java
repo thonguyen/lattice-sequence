@@ -1,5 +1,8 @@
 package suffixtree;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +18,7 @@ import java.util.TreeSet;
  *
  */
 public class GeneralizedSuffixTree {
+	
 	//Begin of sentinel, sentinel of Si is SENTINEL_BEGIN + i
 	private static char SENTINEL_BEGIN = 'A';
 	//original Strings
@@ -39,10 +43,8 @@ public class GeneralizedSuffixTree {
 	//A list of list of ordered leafs by string si
 	private List<ArrayList<Node>> orderedLeafs = new ArrayList<ArrayList<Node>>();
 	
-	//list of node which contain the longest common substrings
+	//list of node which contains the longest common substrings
 	private List<Node> result = new LinkedList<Node>();
-	//Deepest node.... 
-	private int maxDepth = 0;
 	
 	private Node previousNode;
 
@@ -66,7 +68,7 @@ public class GeneralizedSuffixTree {
 		buildTree();
 	}
 	
-	public GeneralizedSuffixTree(String[] seqs) {
+	public GeneralizedSuffixTree(String[] seqs){
 		StringBuilder sb = new StringBuilder();
 		numberOfString = seqs.length;
 		stringLimits = new ArrayList<Integer>();
@@ -220,7 +222,6 @@ public class GeneralizedSuffixTree {
 	 */
 	public void numberingLeafs(Node node, int currentNumber){
 		if(node.isLeaf()){
-			node.setNumber(currentNumber++);
 			orderedLeafs.get(node.getFromString()).add(node);
 		}else{//internal node
 			for (Map.Entry<Character, Node> data : node.getChildren().entrySet()) {
@@ -229,27 +230,10 @@ public class GeneralizedSuffixTree {
 		}		
 	}
 
-	public void findLCS(Node node, Set<Integer> stringIds, Map<Integer, List<Node>> commonSubStrings){
-		Map<Character, Node> children = node.getChildren();		
-		if(node.isLeaf()){
-			stringIds.add(node.getFromString());
-		}
-		if(stringIds.size() == numberOfString){
-			List<Node> cs = commonSubStrings.get(node.getDepth());
-			if(cs == null){
-				cs = new ArrayList<Node>();
-				commonSubStrings.put(node.getDepth(), cs);
-			}
-			cs.add(node);
-		}
-		if(children != null){
-			node.printChildren();
-			for (Map.Entry<Character, Node> data : children.entrySet()) {
-				findLCS(data.getValue(), stringIds, commonSubStrings);
-			}		
-		}
-	}
-
+	/**
+	 * 
+	 * @return a list of lcs
+	 */
 	public List<String> getLCS(){
 		List<String> substrings = new ArrayList<String>();
 		if(numberOfString == 1){
@@ -298,17 +282,19 @@ public class GeneralizedSuffixTree {
 	 * A bottom up traversal for compute S(v) and C(v)
 	 * return S(v)
 	 */
-	private int bottomUpTraversal(Node node){
+	private int[] bottomUpTraversal(Node node){
 		Map<Character, Node> children = node.getChildren();
 		if(children == null || children.size() == 0){
-			return 1;
+			return new int[]{1,0};
 		}
 		int s = 0;
-		for (Map.Entry<Character, Node> data : children.entrySet()) {
-			s += bottomUpTraversal(data.getValue());
+		int sigmaH = node.getH();
+		for (Map.Entry<Character, Node> data : children.entrySet()) {			
+			s += bottomUpTraversal(data.getValue())[0];
+			sigmaH += bottomUpTraversal(data.getValue())[1];
 		}
 		//compute c
-		int c = s - node.getH();
+		int c = s - sigmaH;
 		//this is a common substring
 		if(c == numberOfString){
 			if(previousNode == null || previousNode.getParent() != node){
@@ -318,10 +304,9 @@ public class GeneralizedSuffixTree {
 				for(Node n: result){
 					String str = text.substring(n.getEnd() - n.getDepth(), n.getEnd());
 					String currentString = text.substring(node.getEnd() - node.getDepth(), node.getEnd());
-					if(!isSubstring){
-						if (str.indexOf(currentString) >= 0) {
-							isSubstring = true;
-						}
+					if (str.indexOf(currentString) >= 0) {
+						isSubstring = true;
+						continue;
 					}
 					if(currentString.indexOf(str) >= 0){
 						temp.remove(n);
@@ -345,8 +330,11 @@ public class GeneralizedSuffixTree {
 			}
 			*/
 		}
-		node.setC(s - node.getH());
-		return s;
+		//obsolete
+		node.setC(s - sigmaH);
+		//for testing
+		node.setTotalH(sigmaH);
+		return new int[]{s, sigmaH};
 	}
 	/**
 	 * @param queryString
@@ -355,20 +343,77 @@ public class GeneralizedSuffixTree {
 	public List<Integer> getStringIds(String queryString){
 		return null;
 	}
-	public void show(Node node, String s){
-		s += text.substring(node.getStart(), node.getEnd()); 
-		if(node.isLeaf()){
-			//System.out.println(s);
-		}
+	/**
+	 * use for debug
+	 * @param node
+	 * @param s
+	 */
+	public void show(Node node){
 		Map<Character, Node> children = node.getChildren();
+System.out.println("H:" + node.getH());
+System.out.println(text.substring(node.getStart(), node.getEnd()));
 		if(children != null){
 			node.printChildren();
 			for (Map.Entry<Character, Node> data : children.entrySet()) {
-				show(data.getValue(), s);
+				show(data.getValue());
 			}		
 		}
 	}
+	
+    public void printTree() {
+    	PrintWriter out;
+		try {
+			out = new PrintWriter(new FileWriter("st.dot"));
+    	
+        out.println("digraph {");
+        out.println("\trankdir = LR;");
+        out.println("\tedge [arrowsize=0.4,fontsize=10]");
+        //out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
+        out.println("//------leaves------");
+        printLeaves(root, out);
+        out.println("//------internal nodes------");
+        printInternalNodes(root, out);
+        out.println("//------edges------");
+        printEdges(root, out);
+        out.println("//------suffix links------");
+        //printSLinks(root);
+        out.println("}");
+        out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
+    void printLeaves(Node node, PrintWriter out) {
+        if (node.getChildren().size() == 0)
+            out.println("\tnode" + node.getDfNumber() + " [label=\"" + "" + node.getFromString() + "\",shape=circle]");
+        else {
+
+			for (Map.Entry<Character, Node> data : node.getChildren().entrySet()) {
+				printLeaves(data.getValue(), out);
+			}		
+        }
+    }
+    
+    void printInternalNodes(Node node, PrintWriter out) {
+        if (node.getChildren().size() > 0)
+            out.println("\tnode" + node.getDfNumber() + " [label=\"" + "H:" + node.getH() + "," + node.getTotalH() + "," + node.getC() + "\",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]");
+
+		for (Map.Entry<Character, Node> data : node.getChildren().entrySet()) {
+            printInternalNodes(data.getValue(), out);
+		}
+    }
+
+    void printEdges(Node node, PrintWriter out) {
+		for (Map.Entry<Character, Node> data : node.getChildren().entrySet()) {
+            out.println("\tnode" + node.getDfNumber() + " -> node" + data.getValue().getDfNumber() +
+            		" [label=\"" + text.substring(data.getValue().getStart(), data.getValue().getEnd()) + 
+            		"\",weight=3]");
+            printEdges(data.getValue(), out);
+        }
+    }    
+    
 	public TreeSet<String> getAllDistinctSubstrings(Node node){
 		TreeSet<String> subStrings = new TreeSet<String>();
 		Map<Character, Node> children = node.getChildren();

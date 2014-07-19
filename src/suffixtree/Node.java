@@ -9,9 +9,11 @@ public class Node {
 	private Node parent = null;
 	private int fromString;
 	//List<Node> children;
-	private Node suffixLink = null;
-	private int number;
+	private Node suffixLink = null;	
 	private int h = 0;
+	//for debug only, @TODO: remove when the code is stable
+	private int totalH = 0;
+	//for debug only, @TODO: remove when the code is stable
 	private int c = 0;
 	private int dfNumber;
 	Map<Character, Node> children = new TreeMap<Character, Node>();
@@ -103,14 +105,6 @@ public class Node {
 		this.fromString = fromString;
 	}
 
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
 	public int getH() {
 		return h;
 	}
@@ -133,5 +127,13 @@ public class Node {
 
 	public void setC(int c) {
 		this.c = c;
-	}	
+	}
+
+	public int getTotalH() {
+		return totalH;
+	}
+
+	public void setTotalH(int totalH) {
+		this.totalH = totalH;
+	}
 }
