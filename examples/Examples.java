@@ -677,5 +677,12 @@ public class Examples {
 		System.out.println("all closures");
 		Vector<Concept> ac = base.allClosures();
 		System.out.println(ac);
+		
+		System.out.println("Concept lattices");
+		System.out.println(base.conceptLattice(true));
+		
+		System.out.println("Concept lattices False");
+		System.out.println(base.conceptLattice(false));
+		
 	}
 }// end of Example class
