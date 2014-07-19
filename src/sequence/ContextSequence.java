@@ -12,13 +12,14 @@ import java.util.TreeSet;
 
 import suffixtree.GeneralizedSuffixTree;
 import lattice.ClosureSystem;
+import lattice.Context;
 
 /**
  * 
  * @author NGUYEN Van Tho
  * 
  */
-public class ContextSequence extends ClosureSystem {
+public class ContextSequence extends Context{
 	/*
 	 * A set of objects (bees)
 	 */
@@ -51,13 +52,13 @@ public class ContextSequence extends ClosureSystem {
 	}
 
 	public ContextSequence(String filename) throws IOException {
-		init();
-		parse(filename);
+		initialize();
+		parse2(filename);
 		gstAllSequences = new GeneralizedSuffixTree(getStrings());
 		List<String> lcs = gstAllSequences.getLCS();
 	}
 
-	private void init() {
+	private void initialize() {
 		sequences = new TreeSet<Comparable>();
 		observations = new TreeSet<Comparable>();
 
@@ -150,7 +151,7 @@ public class ContextSequence extends ClosureSystem {
      * @param seqs
      * @return
      */
-	private TreeSet<Comparable> getExtent(TreeSet<Comparable> seqs){
+	public TreeSet<Comparable> getExtent(TreeSet<Comparable> seqs){
         TreeSet<Comparable> objects = new TreeSet(observations);
 		for(Comparable seq: seqs){
 			objects.retainAll(getExtent(seq));
@@ -180,7 +181,7 @@ public class ContextSequence extends ClosureSystem {
         return obs;
     }
     
-	private TreeSet<Comparable> getIntent(TreeSet<Comparable> objects){
+	public TreeSet<Comparable> getIntent(TreeSet<Comparable> objects){
 		TreeSet<Comparable> seqs = new TreeSet<Comparable>();
 		
 		for(Comparable obj: objects){
@@ -245,7 +246,7 @@ public class ContextSequence extends ClosureSystem {
         return sequences.contains(seq);
     }
 	
-	private void parse(final String filename) throws IOException {
+	private void parse2(final String filename) throws IOException {
 		String extension = "";
 		int index = filename.lastIndexOf('.');
 		if (index > 0) {
