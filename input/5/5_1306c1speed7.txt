@@ -1,0 +1,7 @@
+Observations: 1 2 3 4 5 
+Attributes: f l n s t
+1 : nfnfnsnsss
+2 : ttnftnnnss
+3 : nffftftttt
+4 : llllsfns
+5 : lsntttffft

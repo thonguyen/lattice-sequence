@@ -1,0 +1,58 @@
+digraph G {
+Graph [rankdir=BT]
+15 [label=" []\n[llllsfns,lsntttffft,nffftftttt,nfnfnsnsss,ttnftnnnss]"]
+31 [label=" [5]\n[lsntttffft]"]
+46 [label=" [4,5]\n[f,ls,n]"]
+59 [label=" [1,2,4,5]\n[f,n,s]"]
+71 [label=" [1,2,3,4,5]\n[f,n]"]
+82 [label=" [3,5]\n[ffft,n,tf,ttt]",style="filled", color="black", fillcolor="cyan3"]
+95 [label=" [2,3,5]\n[ft,n,tt]"]
+108 [label=" [2,5]\n[ft,n,s,tt]"]
+123 [label=" [1,5]\n[f,sn]"]
+137 [label=" [4]\n[llllsfns]"]
+153 [label=" [2,4]\n[f,ns,t]"]
+167 [label=" [1,2,4]\n[f,ns]"]
+181 [label=" [1,4]\n[fns]",style="filled", color="black", fillcolor="cyan3"]
+196 [label=" [3]\n[nffftftttt]"]
+212 [label=" [2,3]\n[ft,nf,tt]"]
+227 [label=" [1,2,3]\n[nf]"]
+240 [label=" [2]\n[ttnftnnnss]"]
+258 [label=" [1,2]\n[nf,nss,t]",style="filled", color="black", fillcolor="cyan3"]
+274 [label=" [1]\n[nfnfnsnsss]"]
+31->15
+46->31
+46->137
+59->46
+59->108
+59->123
+59->167
+71->59
+71->95
+71->227
+82->31
+82->196
+95->82
+95->108
+95->212
+108->31
+108->240
+123->31
+123->274
+137->15
+153->137
+153->240
+167->153
+167->181
+167->258
+181->137
+181->274
+196->15
+212->196
+212->240
+227->212
+227->258
+240->15
+258->240
+258->274
+274->15
+}

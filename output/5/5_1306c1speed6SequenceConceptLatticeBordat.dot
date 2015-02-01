@@ -1,0 +1,73 @@
+digraph G {
+Graph [rankdir=BT]
+15 [label=" []\n[lllllsfnss,lssftttffftt,nfffttfttttt,nffnfnsnsss,ttfnftnnnnss]"]
+31 [label=" [5]\n[lssftttffftt]"]
+46 [label=" [4,5]\n[ls,sf,ss]"]
+59 [label=" [1,2,4,5]\n[f,ss]"]
+71 [label=" [1,2,3,4,5]\n[f]"]
+82 [label=" [3,5]\n[ffftt,fttt,ttf]",style="filled", color="black", fillcolor="cyan3"]
+96 [label=" [2,3,5]\n[ft,ttf]",style="filled", color="black", fillcolor="cyan3"]
+109 [label=" [1,3,5]\n[ff]"]
+122 [label=" [2,5]\n[ft,ss,ttf]",style="filled", color="black", fillcolor="cyan3"]
+137 [label=" [1,2,5]\n[nf,ss]"]
+151 [label=" [1,5]\n[ff,nf,ss]"]
+167 [label=" [4]\n[lllllsfnss]"]
+183 [label=" [2,4]\n[fn,nss,t]",style="filled", color="black", fillcolor="cyan3"]
+197 [label=" [1,2,4]\n[fn,nss]",style="filled", color="black", fillcolor="cyan3"]
+211 [label=" [1,2,3,4]\n[f,n]"]
+224 [label=" [1,4]\n[fns,nss]",style="filled", color="black", fillcolor="cyan3"]
+239 [label=" [3]\n[nfffttfttttt]"]
+255 [label=" [2,3]\n[ft,nf,ttf]",style="filled", color="black", fillcolor="cyan3"]
+270 [label=" [1,2,3]\n[nf]"]
+284 [label=" [1,3]\n[nff]",style="filled", color="black", fillcolor="cyan3"]
+300 [label=" [2]\n[ttfnftnnnnss]"]
+318 [label=" [1,2]\n[fnf,nss,t]",style="filled", color="black", fillcolor="cyan3"]
+335 [label=" [1]\n[nffnfnsnsss]"]
+31->15
+46->31
+46->167
+59->46
+59->137
+59->197
+71->59
+71->96
+71->109
+71->211
+82->31
+82->239
+96->82
+96->122
+96->255
+109->82
+109->151
+109->284
+122->31
+122->300
+137->122
+137->151
+137->318
+151->31
+151->335
+167->15
+183->167
+183->300
+197->183
+197->224
+197->318
+211->197
+211->270
+224->167
+224->335
+239->15
+255->239
+255->300
+270->255
+270->284
+270->318
+284->239
+284->335
+300->15
+318->300
+318->335
+335->15
+}

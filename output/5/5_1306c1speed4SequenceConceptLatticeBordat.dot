@@ -1,0 +1,73 @@
+digraph G {
+Graph [rankdir=BT]
+14 [label=" []\n[ftttnnfftfnnnnssss,llllllllstnssss,llssnfttttffffftttt,nffffftttffftttttt,nfffnftfnsnnsssss]"]
+30 [label=" [5]\n[llssnfttttffffftttt]"]
+45 [label=" [4,5]\n[lls,n,ss,t]",style="filled", color="black", fillcolor="cyan3"]
+59 [label=" [2,4,5]\n[ll,n,ss,t]"]
+72 [label=" [1,2,4,5]\n[n,ss,t]"]
+84 [label=" [1,2,3,4,5]\n[n,t]"]
+95 [label=" [3,5]\n[fffffttt,ffftttt,nf,tttfff]",style="filled", color="black", fillcolor="cyan3"]
+109 [label=" [2,3,5]\n[fft,fttt,nf,tf]",style="filled", color="black", fillcolor="cyan3"]
+122 [label=" [1,2,3,5]\n[ff,ft,nf,tf]"]
+135 [label=" [1,3,5]\n[fff,ft,nf,tf]",style="filled", color="black", fillcolor="cyan3"]
+149 [label=" [2,5]\n[fft,fttt,l,nf,ss,tf]",style="filled", color="black", fillcolor="cyan3"]
+165 [label=" [1,2,5]\n[ff,ft,nf,ss,tf]"]
+180 [label=" [1,5]\n[fff,nft,sn,ss,tf]",style="filled", color="black", fillcolor="cyan3"]
+196 [label=" [4]\n[llllllllstnssss]"]
+212 [label=" [2,4]\n[lllllll,nssss,tn]",style="filled", color="black", fillcolor="cyan3"]
+227 [label=" [1,2,4]\n[nssss,t]",style="filled", color="black", fillcolor="cyan3"]
+241 [label=" [3]\n[nffffftttffftttttt]"]
+257 [label=" [2,3]\n[fft,fttt,nff,tf]",style="filled", color="black", fillcolor="cyan3"]
+272 [label=" [1,2,3]\n[ft,nff,tf]",style="filled", color="black", fillcolor="cyan3"]
+286 [label=" [1,3]\n[ft,nfff,tf]",style="filled", color="black", fillcolor="cyan3"]
+302 [label=" [2]\n[ftttnnfftfnnnnssss]"]
+320 [label=" [1,2]\n[ftfn,nff,nnssss]",style="filled", color="black", fillcolor="cyan3"]
+337 [label=" [1]\n[nfffnftfnsnnsssss]"]
+30->14
+45->30
+45->196
+59->45
+59->149
+59->212
+72->59
+72->165
+72->227
+84->72
+84->122
+95->30
+95->241
+109->95
+109->149
+109->257
+122->109
+122->135
+122->165
+122->272
+135->95
+135->180
+135->286
+149->30
+149->302
+165->149
+165->180
+165->320
+180->30
+180->337
+196->14
+212->196
+212->302
+227->212
+227->320
+241->14
+257->241
+257->302
+272->257
+272->286
+272->320
+286->241
+286->337
+302->14
+320->302
+320->337
+337->14
+}

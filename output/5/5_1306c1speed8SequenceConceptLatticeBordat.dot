@@ -1,0 +1,49 @@
+digraph G {
+Graph [rankdir=BT]
+10 [label=" []\n[fttttn,llllnns,nffttfttt,nfnfsnss,ttnffnnss]"]
+26 [label=" [5]\n[llllnns]"]
+41 [label=" [4,5]\n[lll,n]",style="filled", color="black", fillcolor="cyan3"]
+53 [label=" [1,2,3,4,5]\n[n]"]
+64 [label=" [2,5]\n[nns,t]",style="filled", color="black", fillcolor="cyan3"]
+77 [label=" [1,2,5]\n[ns]"]
+90 [label=" [4]\n[fttttn]"]
+106 [label=" [3,4]\n[fttt,n]",style="filled", color="black", fillcolor="cyan3"]
+120 [label=" [2,3,4]\n[f,n,tt]"]
+133 [label=" [1,2,3,4]\n[f,n]"]
+146 [label=" [2,4]\n[f,ttn]",style="filled", color="black", fillcolor="cyan3"]
+161 [label=" [3]\n[nffttfttt]"]
+177 [label=" [2,3]\n[nff,tt]",style="filled", color="black", fillcolor="cyan3"]
+192 [label=" [1,2,3]\n[nf]"]
+206 [label=" [2]\n[ttnffnnss]"]
+224 [label=" [1,2]\n[fn,nf,nss,t]",style="filled", color="black", fillcolor="cyan3"]
+240 [label=" [1]\n[nfnfsnss]"]
+26->10
+41->26
+41->90
+53->41
+53->77
+53->133
+64->26
+64->206
+77->64
+77->224
+90->10
+106->90
+106->161
+120->106
+120->146
+120->177
+133->120
+133->192
+146->90
+146->206
+161->10
+177->161
+177->206
+192->177
+192->224
+206->10
+224->206
+224->240
+240->10
+}

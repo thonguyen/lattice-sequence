@@ -1,0 +1,57 @@
+digraph G {
+Graph [rankdir=BT]
+14 [label=" []\n[lllllllllllstfnsssss,llssssffttttttffffffttttt,nttttnnnffttfnnnnnnssssss,sffffnnftfnnsnnssssssss,sffftfffftttfftftttttttt]"]
+30 [label=" [5]\n[llssssffttttttffffffttttt]"]
+45 [label=" [4,5]\n[lls,ssss,tf]",style="filled", color="black", fillcolor="cyan3"]
+58 [label=" [1,2,4,5]\n[ssss,tf]",style="filled", color="black", fillcolor="cyan3"]
+70 [label=" [1,2,3,4,5]\n[s,tf]"]
+81 [label=" [3,5]\n[ffffttt,ftttttt,sff,tffff,tttff]",style="filled", color="black", fillcolor="cyan3"]
+95 [label=" [2,3,5]\n[fftt,s,ttf,tttt]",style="filled", color="black", fillcolor="cyan3"]
+108 [label=" [1,2,3,5]\n[ff,ft,s,tf]"]
+121 [label=" [1,3,5]\n[ffff,ft,sff,tf]",style="filled", color="black", fillcolor="cyan3"]
+135 [label=" [2,5]\n[fftt,n,ssss,ttf,tttt]",style="filled", color="black", fillcolor="cyan3"]
+150 [label=" [1,2,5]\n[ff,ft,n,ssss,tf]",style="filled", color="black", fillcolor="cyan3"]
+165 [label=" [1,5]\n[ffff,ft,sff,ssss,tf]",style="filled", color="black", fillcolor="cyan3"]
+181 [label=" [4]\n[lllllllllllstfnsssss]"]
+196 [label=" [1,2,4]\n[nsssss,tfn]",style="filled", color="black", fillcolor="cyan3"]
+210 [label=" [3]\n[sffftfffftttfftftttttttt]"]
+226 [label=" [1,3]\n[ffff,ftf,sfff]",style="filled", color="black", fillcolor="cyan3"]
+241 [label=" [2]\n[nttttnnnffttfnnnnnnssssss]"]
+257 [label=" [1,2]\n[ff,ft,nnf,nnssssss,tfnn]",style="filled", color="black", fillcolor="cyan3"]
+273 [label=" [1]\n[sffffnnftfnnsnnssssssss]"]
+30->14
+45->30
+45->181
+58->45
+58->150
+58->196
+70->58
+70->108
+81->30
+81->210
+95->81
+95->135
+108->95
+108->121
+108->150
+121->81
+121->165
+121->226
+135->30
+135->241
+150->135
+150->165
+150->257
+165->30
+165->273
+181->14
+196->181
+196->257
+210->14
+226->210
+226->273
+241->14
+257->241
+257->273
+273->14
+}

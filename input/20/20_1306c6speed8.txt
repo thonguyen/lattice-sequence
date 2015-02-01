@@ -1,0 +1,22 @@
+Observations: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+Attributes: f l n s t
+1 : nntfnttt
+2 : llslllllss
+3 : tttnnnsns
+4 : nfnfnnsnnfff
+5 : nntfffn
+6 : ffftfnft
+7 : tffnfnnnsn
+8 : ttnffffnn
+9 : lllslsn
+10 : nnnnss
+11 : ftttfttffffn
+12 : tttffffffns
+13 : ttnfnsntt
+14 : snfffnt
+15 : nttfsnn
+16 : lslsttfs
+17 : llntftff
+18 : ttttftt
+19 : tttttttntt
+20 : ttttft

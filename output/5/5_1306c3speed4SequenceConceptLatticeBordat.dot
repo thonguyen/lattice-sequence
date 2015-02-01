@@ -1,0 +1,64 @@
+digraph G {
+Graph [rankdir=BT]
+10 [label=" []\n[llsssfsllslsllsl,ntfnftttffttttt,nttnnnnnnfstnnnn,sffnnnnfnnnnnnsssss,sfnsnfttttfnnnf]"]
+26 [label=" [5]\n[sfnsnfttttfnnnf]"]
+41 [label=" [4,5]\n[ftttt,nfttt,s,tfn,tttf]",style="filled", color="black", fillcolor="cyan3"]
+55 [label=" [3,4,5]\n[fn,nf,s]"]
+68 [label=" [1,3,4,5]\n[nf]"]
+80 [label=" [1,2,3,4,5]\n[f,n]"]
+91 [label=" [1,4,5]\n[nf,tt]"]
+105 [label=" [3,5]\n[fnnn,nnnf,ns,sf]",style="filled", color="black", fillcolor="cyan3"]
+120 [label=" [2,3,5]\n[sf]"]
+133 [label=" [1,2,3,5]\n[f,n,s]"]
+146 [label=" [1,3,5]\n[nnnf,s]",style="filled", color="black", fillcolor="cyan3"]
+161 [label=" [1,5]\n[nnnf,s,tt]",style="filled", color="black", fillcolor="cyan3"]
+177 [label=" [4]\n[ntfnftttffttttt]"]
+193 [label=" [3,4]\n[ff,fn,nf,s]"]
+208 [label=" [1,4]\n[nf,nt,tt]"]
+223 [label=" [3]\n[sffnnnnfnnnnnnsssss]"]
+240 [label=" [2,3]\n[sf,sss]",style="filled", color="black", fillcolor="cyan3"]
+255 [label=" [1,3]\n[nnnnf,nnnnnn,s]",style="filled", color="black", fillcolor="cyan3"]
+270 [label=" [2]\n[llsssfsllslsllsl]"]
+286 [label=" [1,2]\n[fs,n]"]
+300 [label=" [1]\n[nttnnnnnnfstnnnn]"]
+26->10
+41->26
+41->177
+55->41
+55->105
+55->193
+68->55
+68->91
+68->146
+80->68
+80->133
+91->41
+91->161
+91->208
+105->26
+105->223
+120->105
+120->240
+133->120
+133->146
+133->286
+146->105
+146->161
+146->255
+161->26
+161->300
+177->10
+193->177
+193->223
+208->177
+208->300
+223->10
+240->223
+240->270
+255->223
+255->300
+270->10
+286->270
+286->300
+300->10
+}
