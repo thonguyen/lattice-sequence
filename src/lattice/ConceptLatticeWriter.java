@@ -37,5 +37,15 @@ interface ConceptLatticeWriter {
      * @throws  IOException  When an IOException occurs
      */
     void write(ConceptLattice lattice, BufferedWriter file) throws IOException;
+    /**
+     * 
+     * @param lattice
+     * @param file
+     * @param numberOfObjects
+     * @param minSupport : ex: 30% 
+     * @param minLength : minLength of sequences
+     * @throws IOException
+     */
+    void write(ConceptLattice lattice, BufferedWriter file, int numberOfObjects, int minSupport, int minLength) throws IOException;
 }
 

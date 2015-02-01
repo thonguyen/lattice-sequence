@@ -10,9 +10,13 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import dgraph.Edge;
+import dgraph.Node;
 import suffixtree.GeneralizedSuffixTree;
 import lattice.ClosureSystem;
+import lattice.ComparableSet;
 import lattice.Concept;
+import lattice.ConceptLattice;
 import lattice.Context;
 
 /**
@@ -69,13 +73,45 @@ public class ContextSequence extends Context{
 
 	@Override
 	public TreeSet<Comparable> getSet() {
-		return sequences;
+		return observations;
 	}
-	
 
+	
+    public ConceptLattice closedSetLatticeSequence(boolean diagram) {
+        ConceptLattice csl = this.closedSetLattice(diagram);
+        // TreeMap<Concept, Concept> nodes = new TreeMap<Concept, Concept>();
+        for (Node n : csl.getNodes()) {
+             Concept cl = (Concept) n;
+             cl.putSetA(new ComparableSet(this.getIntent(cl.getSetA())));
+        }
+        
+        for (Edge e: csl.getEdges()){
+        	Node tmp = e.getFrom();
+        	csl.addEdge(e.getTo(), e.getFrom(), e.getContent());
+        	csl.removeEdge(e);
+        }
+        return csl;
+    }
+    
+    public ConceptLattice conceptLatticeSequence(boolean diagram) {
+        ConceptLattice csl = this.closedSetLattice(diagram);
+        // TreeMap<Concept, Concept> nodes = new TreeMap<Concept, Concept>();
+        for (Node n : csl.getNodes()) {
+             Concept cl = (Concept) n;
+             //cl.putSetB(new ComparableSet(cl.getSetA()));
+             cl.putSetB(new ComparableSet(this.getIntent(cl.getSetA())));
+        }
+        
+        for (Edge e: csl.getEdges()){
+        	Node tmp = e.getFrom();
+        	csl.addEdge(e.getTo(), e.getFrom(), e.getContent());
+        	csl.removeEdge(e);
+        }
+        return csl;
+    }
 	@Override
 	public TreeSet<Comparable> closure(TreeSet<Comparable> s) {
-		return getIntent(getExtent(s));
+		return getExtent(getIntent(s));
 	}
 	/**
 	 * build the closure of sequences using closure operators
@@ -249,6 +285,45 @@ public class ContextSequence extends Context{
      */
     public boolean containsSequence(Comparable seq) {
         return sequences.contains(seq);
+    }
+
+    /**
+     * Returns the lecticaly next closed set of the specified one.
+     *
+     * This treatment is an implementation of the best knowm algorithm of Wille
+     * whose complexity is in O(Cl|S|^2), where S is the initial set of elements,
+     * and Cl is the closure computation complexity.
+     *
+     * @param   cl  a concept
+     *
+     * @return  the lecticaly next closed set
+     */
+    @Override
+    public Concept nextClosure(Concept cl) {
+        TreeSet<Comparable> set = new TreeSet(this.getSet());
+        boolean success = false;
+        TreeSet setA = new TreeSet(cl.getSetA());
+        Comparable ni = set.last();
+        do {
+            ni = (Comparable) set.last();
+            set.remove(ni);
+            if (!setA.contains(ni)) {
+                setA.add(ni);
+                TreeSet setB = this.closure(setA);
+                TreeSet setC = new TreeSet(setB);
+                setB.removeAll(setA);
+                if (setB.isEmpty() || ((Comparable) setB.first()).compareTo(ni) >= 1) {
+                    setA = setC;
+                    success = true;
+                } else {
+                    setA.remove(ni);
+                }
+            } 
+            else {
+                setA.remove(ni);
+            }
+        } while (!success && ni.compareTo(this.getSet().first()) >= 1);
+        return new Concept(setA, false);
     }
 
 	private void parse2(final String filename) throws IOException {

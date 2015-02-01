@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+
 import dgraph.DAGraph;
 import dgraph.DGraph;
 import dgraph.Node;
@@ -308,5 +309,6 @@ public abstract class ClosureSystem {
         // Finally, return the list of reducible elements with their equivalent attributes.
         return red;
     }
+    
 }
 

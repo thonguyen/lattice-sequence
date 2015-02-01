@@ -939,7 +939,7 @@ public class Context extends ClosureSystem {
         // TreeMap<Concept, Concept> nodes = new TreeMap<Concept, Concept>();
         for (Node n : csl.getNodes()) {
              Concept cl = (Concept) n;
-             cl.putSetB(new ComparableSet(this.getExtent(cl.getSetA())));
+             cl.putSetB(new ComparableSet(this.getIntent(cl.getSetA())));
         }
         return csl;
     }

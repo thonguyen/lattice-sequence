@@ -145,6 +145,7 @@ public class LowestCommonAncestor {
 			on = newOn;
 		}
 	}
+
 	private void checkAndDoubleHead(int n){
 		if(n >= head.length){
 			CompleteBinaryNode[] newHead = new CompleteBinaryNode[n* 2 + 1];

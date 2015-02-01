@@ -60,6 +60,8 @@ import dgraph.Node;
  * title ConceptLattice UML graph
  */
 public class ConceptLattice extends Lattice {
+	private int nbConceptPertinent = 0;
+	private int nbConcept = 0;
     /*
      * Register dot writer
      */
@@ -904,5 +906,44 @@ public class ConceptLattice extends Lattice {
             file.close();
         }
     }
+    
+    /**
+     * Save the description of this component in a file whose name is specified.
+     *
+     * @param   filename  the name of the file
+     *
+     * @throws  IOException  When an IOException occurs
+     */
+    public void save(final String filename, int numberOfObjects, int minSupport, int minLength) throws IOException {
+        String extension = "";
+        int index = filename.lastIndexOf('.');
+        if (index > 0) {
+            extension = filename.substring(index + 1);
+        }
+        ConceptLatticeWriter writer = ConceptLatticeWriterFactory.get(extension);
+        if (writer == null) {
+            super.save(filename);
+        } else {
+            BufferedWriter file = new BufferedWriter(new FileWriter(filename));
+            writer.write(this, file, numberOfObjects, minSupport, minLength);
+            file.close();
+        }
+    }
+
+	public int getNbConceptPertinent() {
+		return nbConceptPertinent;
+	}
+
+	public void setNbConceptPertinent(int nbConceptPertinent) {
+		this.nbConceptPertinent = nbConceptPertinent;
+	}
+
+	public int getNbConcept() {
+		return nbConcept;
+	}
+
+	public void setNbConcept(int nbConcept) {
+		this.nbConcept = nbConcept;
+	}
 }
 

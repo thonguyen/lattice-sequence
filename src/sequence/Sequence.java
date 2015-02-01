@@ -38,7 +38,7 @@ public class Sequence implements Comparable<Sequence>{
 	@Override
 	public int compareTo(Sequence o) {
 		//@TODO: use contains or indexOf?
-		/*
+		
 		if(toString().equals(o.toString())){
 			return 0;
 		}
@@ -48,7 +48,6 @@ public class Sequence implements Comparable<Sequence>{
 		if(o.containSubsequence(this)){
 			return -1;
 		}
-		*/
 		//
 		return toString().compareTo(o.toString());
 	}

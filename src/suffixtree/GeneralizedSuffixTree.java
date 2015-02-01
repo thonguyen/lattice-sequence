@@ -20,7 +20,7 @@ import java.util.TreeSet;
 public class GeneralizedSuffixTree {
 	
 	//Begin of sentinel, sentinel of Si is SENTINEL_BEGIN + i
-	private static char SENTINEL_BEGIN = 'A';
+	private static char SENTINEL_BEGIN = '\ud800';
 	//original Strings
 	String []sequences;
 	//Concatenation of all String
